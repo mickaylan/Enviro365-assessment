@@ -5,6 +5,6 @@ import java.net.URI;
 
 public interface FileParser {
     abstract void parseCSV(File csvFile);
-    File convertCSVDataToImage(String base64ImageData);
+    File convertCSVDataToImage(String fileType, String base64ImageData);
     URI createImageLink(File fileImage);
 }
