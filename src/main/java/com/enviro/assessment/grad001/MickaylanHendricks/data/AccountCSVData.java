@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class AccountCSVData implements FileParser {
@@ -49,4 +48,6 @@ public class AccountCSVData implements FileParser {
     public URI createImageLink(File fileImage) {
         return null;
     }
+
+
 }
