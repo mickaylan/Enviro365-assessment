@@ -10,11 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.xml.bind.*;
 
-@SpringBootApplication
+
 public class AccountCSVData implements FileParser {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AccountCSVData.class, args);
+    public AccountCSVData() {
         AccountCSVData data = new AccountCSVData();
         data.parseCSV(new File("src/main/resources/1672815113084-GraduateDev_AssessmentCsv_Ref003.csv"));
     }
@@ -64,7 +63,7 @@ public class AccountCSVData implements FileParser {
 
     @Override
     public URI createImageLink(File fileImage) {
-        return null;
+        return fileImage.toURI();
     }
 
 
