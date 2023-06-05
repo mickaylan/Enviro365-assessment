@@ -2,18 +2,16 @@ package com.enviro.assessment.grad001.MickaylanHendricks.data;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import javax.xml.bind.*;
 
 @SpringBootApplication
 public class AccountCSVData implements FileParser {
-
-    ArrayList<String[]> store = new ArrayList<>();
 
     public static void main(String[] args) {
         SpringApplication.run(AccountCSVData.class, args);
@@ -23,6 +21,7 @@ public class AccountCSVData implements FileParser {
 
     @Override
     public void parseCSV(File csvFile) {
+        Set<String[]> store = new HashSet<>();
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             String line;
             br.readLine();
@@ -33,15 +32,34 @@ public class AccountCSVData implements FileParser {
             e.printStackTrace();
         }
 
-        for (String[] a:
-             store) {
-            System.out.println(Arrays.toString(a[0].split("\n")));
+        for (String[] a : store) {
+            convertCSVDataToImage(a[2], a[3]);
         }
     }
 
     @Override
-    public File convertCSVDataToImage(String base64ImageData) {
-        return null;
+    public File convertCSVDataToImage(String fileType, String base64ImageData) {
+        String ftype = fileType.split("/")[1];
+        byte[] data = DatatypeConverter.parseBase64Binary(base64ImageData);
+        String fileName;
+        if (ftype.equals("jpeg")) {
+            fileName = "file.jpg";
+        } else if (ftype.equals("png")) {
+            fileName = "file2.png";
+        } else {
+            throw new IllegalArgumentException("Unsupported file type: " + ftype);
+        }
+
+        File file = new File("src/main/resources/" + fileName);
+
+        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
+            outputStream.write(data);
+            System.out.println("File saved successfully: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return file;
     }
 
     @Override
