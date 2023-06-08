@@ -1,49 +1,58 @@
 package com.enviro.assessment.grad001.MickaylanHendricks.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+
+import java.net.URI;
 
 @Entity
+@Table(name= "ACCOUNT_PROFILETB")
 public class AccountProfile {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String accountHolderName;
-    private String accountHolderSurname;
-    private String httpImageLink;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        private String accountHolderName;
+        private String accountHolderSurname;
+        private URI httpImageLink;
 
-    public Long getId() {
-        return id;
-    }
+        public AccountProfile() {
+        }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        public AccountProfile(String accountHolderName, String accountHolderSurname, URI httpImageLink) {
+                this.accountHolderName = accountHolderName;
+                this.accountHolderSurname = accountHolderSurname;
+                this.httpImageLink = httpImageLink;
+        }
 
-    public String getAccountHolderName() {
-        return accountHolderName;
-    }
 
-    public void setAccountHolderName(String accountHolderName) {
-        this.accountHolderName = accountHolderName;
-    }
+        public Long getId() {
+                return id;
+        }
 
-    public String getAccountHolderSurname() {
-        return accountHolderSurname;
-    }
+        public void setId(Long id) {
+                this.id = id;
+        }
 
-    public void setAccountHolderSurname(String accountHolderSurname) {
-        this.accountHolderSurname = accountHolderSurname;
-    }
+        public String getAccountHolderName() {
+                return accountHolderName;
+        }
 
-    public String getHttpImageLink() {
-        return httpImageLink;
-    }
+        public void setAccountHolderName(String accountHolderName) {
+                this.accountHolderName = accountHolderName;
+        }
 
-    public void setHttpImageLink(String httpImageLink) {
-        this.httpImageLink = httpImageLink;
-    }
+        public String getAccountHolderSurname() {
+                return accountHolderSurname;
+        }
 
+        public void setAccountHolderSurname(String accountHolderSurname) {
+                this.accountHolderSurname = accountHolderSurname;
+        }
+
+        public URI getHttpImageLink() {
+                return httpImageLink;
+        }
+
+        public void setHttpImageLink(URI httpImageLink) {
+                this.httpImageLink = httpImageLink;
+        }
 }
